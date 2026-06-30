@@ -3,7 +3,7 @@
 > A real-time computer-vision pipeline and robotic arm that **sees a colored cube, classifies it with a neural network, and physically sorts it into the correct bin** — fully autonomously.
 
 <p align="center">
-  <img src="arm.jpeg" alt="Robotic sorting arm" width="480">
+  <img src="docs/arm.jpeg" alt="Robotic sorting arm" width="480">
 </p>
 
 
@@ -32,13 +32,13 @@ It brought together skills across **machine learning, computer vision, distribut
 
 ## System architecture
 
-**The closed loop:**
+<p align="center">
+  <img src="docs/sa.png" alt="System Architecture" width="480">
+</p>
 
-1. **Capture** — the ESP32-CAM streams JPEG frames over WiFi to the server.
-2. **Localize & classify** — the server finds the cube, crops it, resizes to 96×96, and runs the CNN to predict **gray / orange / black**.
-3. **Stabilize** — a label is accepted only after appearing in 3 consecutive frames, eliminating false triggers from motion and flicker.
-4. **Actuate** — on a confident, stable detection, the server sends a one-byte command over serial to the arm.
-5. **Sort** — the arm reaches, grips, lifts, rotates to the matching bin, and releases — then returns home.
+The system is three cooperating nodes in a closed feedback loop. The **ESP32-CAM** captures frames and streams them to the server over WiFi. The **Flask server** (on a PC) does the heavy lifting — locating and cropping the cube, classifying its color with the CNN, and deciding when to act. The **arm's ESP32** receives a single-byte command over USB serial and runs the physical sorting motion, which the camera then sees, closing the loop. Splitting the work this way lets each device do only what it's best at: capture, vision/ML, and real-time motor control.
+ 
+**Step by step:** the camera streams a frame → the server localizes and classifies the cube (gray / orange / black) → a label is accepted only after three consecutive agreeing frames → the server sends the matching command (with an 8-second cooldown so a cube is never sorted twice) → the arm reaches, grips, lifts, rotates to the correct bin, releases, and returns home.
 
 ---
 
