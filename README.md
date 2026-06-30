@@ -6,13 +6,6 @@
   <img src="arm.jpeg" alt="Robotic sorting arm" width="480">
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white">
-  <img src="https://img.shields.io/badge/TensorFlow-Keras-FF6F00?logo=tensorflow&logoColor=white">
-  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?logo=opencv&logoColor=white">
-  <img src="https://img.shields.io/badge/Flask-REST%20API-000000?logo=flask&logoColor=white">
-  <img src="https://img.shields.io/badge/ESP32-Embedded%20C++-E7352C?logo=espressif&logoColor=white">
-</p>
 
 ---
 
